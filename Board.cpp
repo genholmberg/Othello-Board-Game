@@ -10,9 +10,6 @@ Board::Board()
 	white_count = 0;
 	black_count = 0;
 	full_board = false;
-    /*black_chip = "\u26AB";
-    white_chip = "\u26AA";
-    blank = "U+1F35";*/
     black_chip = "B";
     white_chip = "W";
     blank = "O";
@@ -74,10 +71,10 @@ bool Board::is_free(string chip)
 
 void Board::display_board()
 {
-	cout << "  A B C D E F G H\n"; // take out
+	cout << "  A B C D E F G H\n";
 	for(int i = 0; i < ROW; i++)
 	{
-		cout  << i+1;  // take out
+		cout  << i+1;
 		for(int j = 0; j < COLUMN; j++)
 			cout << " " << board[i][j];
 		cout  << endl;

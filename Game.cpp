@@ -84,32 +84,21 @@ void Game::play_game()
 
 		//AI
 		int move_value = INT_MIN;
-		// cout << "Move value is before the for loop:  	" << move_value << endl;
 		corrdinate best_ply;
 		board.legal_plys(!player);
 		vector<corrdinate> *_plys = board.get_possible_plys();
 		for (std::vector<corrdinate>::iterator it = _plys->begin(); it != _plys->end(); it++)
 		{
-			// cout << "legal move corr [r, c]:[ " << it->get_row() << ", " << it->get_column() << "]" << endl;
 			// create a new board be implementing the play
 			Board copy_current_board(board);
-			// cout << "legal move set" << endl;
 			copy_current_board.legal_plys(!player);
-			// copy_current_board.display_board();
-			// cout << "where is the move" << endl;
-			// copy_current_board.set_board_piece(*it, "X");
-			// copy_current_board.display_board();
-			// copy_current_board.set_board_piece(*it, "L");
 			copy_current_board.make_ply(*it, !player);
 			int value = min_alpha_beta(copy_current_board, INT_MIN, INT_MAX, level, depth);
-			// cout << "after value" << endl << "move value: " << move_value << endl << "value : " << value << endl;
 			if (value > move_value)
 			{
-				//cout << "Play that is made corr [r, c]:[ " << it->get_row() << ", " << it->get_column() << "]" << endl;
 				move_value = value;
 				it->set_play_value(move_value);
 				board.make_ply(*it, !player);
-				// board.display_board();
 			}
 		}
 		board.get_scores();
@@ -124,7 +113,6 @@ void Game::load_board()
 	board.display_board();
 }
 
-// to do finish minimax
 int Game::min_alpha_beta (Board b, int alpha, int beta, int level, int depth)
 {
 	int v;
@@ -163,7 +151,6 @@ int Game::min_alpha_beta (Board b, int alpha, int beta, int level, int depth)
 	{
 		temp_board.make_ply(*it, true);
 		v = max_alpha_beta (temp_board, alpha, beta, level+1, depth);
-		// reset board - do I need to if it is a copy?
 		beta = minimum(v, beta);
 		if (beta <= alpha)
 		{
